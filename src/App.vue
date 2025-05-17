@@ -89,8 +89,8 @@
             class="w-36 h-36 rounded-full border object-cover"
           />
           <div class="name_wrap">
-            <h2 class="text-2xl font-bold">{{ studentName }}</h2>
-            <p class="italic">{{ studentClass }}</p>
+            <div class="name">{{ studentName }}</div>
+            <div class="class">{{ studentClass }}</div>
           </div>
 
           <div
@@ -219,17 +219,18 @@ const downloadImage = async () => {
     }
     .name_wrap {
       position: absolute;
-      top: 40%;
+      top: 43%;
       left: 6%;
       color: #00a69c;
       width: 30%;
       text-align: center;
-      h2 {
+      .name {
         font-size: 2rem;
         line-height: 1.2;
+        margin-bottom: 23px;
         font-weight: 700;
       }
-      p {
+      .class {
         font-size: 1.125rem;
         line-height: 1.4;
       }
