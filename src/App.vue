@@ -22,7 +22,7 @@
       <div class="" style="display: flex; flex-direction: row; gap: 1rem">
         <!-- Cột 1: Tên, lớp, ảnh -->
         <div style="display: flex; flex-direction: column">
-          <input
+          <!-- <input
             id="studentName"
             v-model="studentName"
             placeholder="Nhập họ tên học sinh"
@@ -33,7 +33,7 @@
             v-model="studentClass"
             placeholder="Lớp"
             class="input"
-          />
+          /> -->
           <input
             id="studentImage"
             type="file"
@@ -53,7 +53,7 @@
           />
         </div>
         <!-- Cột 3: Ngày và giáo viên chủ nhiệm -->
-        <div style="display: flex; flex-direction: column">
+        <!-- <div style="display: flex; flex-direction: column">
           <input
             id="date"
             type="date"
@@ -67,7 +67,7 @@
             placeholder="Tên giáo viên chủ nhiệm"
             class="input"
           />
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -88,10 +88,10 @@
             :src="studentImage"
             class="w-36 h-36 rounded-full border object-cover"
           />
-          <div class="name_wrap">
+          <!-- <div class="name_wrap">
             <div class="name">{{ studentName }}</div>
             <div class="class">{{ studentClass }}</div>
-          </div>
+          </div> -->
 
           <div
             class="mt-4 text-sm leading-relaxed whitespace-pre-line comment_wrap"
@@ -99,11 +99,11 @@
             {{ comment }}
           </div>
 
-          <div class="text-right mt-6 text-sm date_wrap">
+          <!-- <div class="text-right mt-6 text-sm date_wrap">
             <div>{{ formattedDate }}</div>
             <div class="mt-2 font-semibold">Giáo viên chủ nhiệm</div>
             <div class="mt-2 font-semibold">{{ teacherName || "..." }}</div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
