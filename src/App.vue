@@ -166,11 +166,21 @@ const handleImageUpload = (e) => {
 };
 
 const downloadImage = async () => {
-  const canvas = await html2canvas(previewRef.value);
-  const link = document.createElement("a");
-  link.download = `${studentName.value || "phieu-nhan-xet"}.png`;
-  link.href = canvas.toDataURL();
-  link.click();
+  const canvas = await html2canvas(previewRef.value, {
+    useCORS: true, // rất quan trọng nếu bạn dùng hình ảnh từ file hoặc background có SVG
+    scale: 2, // tăng độ nét cho ảnh xuất ra
+  });
+
+  canvas.toBlob((blob) => {
+    if (blob) {
+      const link = document.createElement("a");
+      link.download = `${studentName.value || "phieu-nhan-xet"}.png`;
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    } else {
+      alert("Không thể tạo ảnh. Thử lại hoặc kiểm tra ảnh đầu vào.");
+    }
+  }, "image/png");
 };
 </script>
 
