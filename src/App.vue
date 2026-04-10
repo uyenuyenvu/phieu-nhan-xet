@@ -9,7 +9,7 @@
         :class="[
           'px-4 py-2 rounded text-sm border',
           selectedTemplate.id === tpl.id
-            ? 'bg-pink-500 text-white'
+            ? 'bg-pink-500 text-white active'
             : 'bg-white hover:bg-gray-100',
         ]"
       >
@@ -22,7 +22,7 @@
       <div class="" style="display: flex; flex-direction: row; gap: 1rem">
         <!-- Cột 1: Tên, lớp, ảnh -->
         <div style="display: flex; flex-direction: column">
-          <!-- <input
+           <input
             id="studentName"
             v-model="studentName"
             placeholder="Nhập họ tên học sinh"
@@ -33,7 +33,7 @@
             v-model="studentClass"
             placeholder="Lớp"
             class="input"
-          /> -->
+          />
           <input
             id="studentImage"
             type="file"
@@ -53,7 +53,7 @@
           />
         </div>
         <!-- Cột 3: Ngày và giáo viên chủ nhiệm -->
-        <!-- <div style="display: flex; flex-direction: column">
+         <div style="display: flex; flex-direction: column">
           <input
             id="date"
             type="date"
@@ -67,7 +67,7 @@
             placeholder="Tên giáo viên chủ nhiệm"
             class="input"
           />
-        </div> -->
+        </div> 
       </div>
     </div>
 
@@ -83,15 +83,14 @@
         class="absolute inset-0 p-8 flex flex-col justify-between text-black content_wrap"
       >
         <div class="content">
-          <img
-            v-if="studentImage"
-            :src="studentImage"
-            class="w-36 h-36 rounded-full border object-cover"
-          />
-          <!-- <div class="name_wrap">
+          <div v-if="studentImage" class="avatar">
+            <img :src="studentImage" alt="Avatar" />
+          </div>
+          <div class="border_avt" v-if="[1,4].includes(selectedTemplate?.id)"></div>
+           <div class="name_wrap">
             <div class="name">{{ studentName }}</div>
             <div class="class">{{ studentClass }}</div>
-          </div> -->
+          </div> 
 
           <div
             class="mt-4 text-sm leading-relaxed whitespace-pre-line comment_wrap"
@@ -99,11 +98,11 @@
             {{ comment }}
           </div>
 
-          <!-- <div class="text-right mt-6 text-sm date_wrap">
+           <div class="text-right mt-6 text-sm date_wrap">
             <div>{{ formattedDate }}</div>
             <div class="mt-2 font-semibold">Giáo viên chủ nhiệm</div>
             <div class="mt-2 font-semibold">{{ teacherName || "..." }}</div>
-          </div> -->
+          </div> 
         </div>
       </div>
     </div>
@@ -124,16 +123,21 @@
 import { ref, computed } from "vue";
 import html2canvas from "html2canvas";
 import template1 from "./assets/templates/1.png";
-// import template2 from "@/assets/templates/2.png";
-// import template3 from "@/assets/templates/3.png";
-// import template4 from "@/assets/templates/4.png";
+import template2 from "./assets/templates/2.png";
+import template3 from "./assets/templates/3.png";
+import template4 from "./assets/templates/4.png";
+import template5 from "./assets/templates/5.png";
+import template6 from "./assets/templates/6.png";
+
 
 // Danh sách template
 const templates = [
   { id: 1, name: "mẫu 1", bg: template1 },
-  //   { id: 2, name: "Trường học vui vẻ", bg: "/templates/template2.png" },
-  //   { id: 3, name: "Mây xanh chim hót", bg: "/templates/template3.png" },
-  //   { id: 4, name: "Bé ngoan năng động", bg: "/templates/template4.png" },
+  { id: 2, name: "mẫu 2", bg: template2 },
+  { id: 3, name: "mẫu 3", bg: template3 },
+  { id: 4, name: "mẫu 4", bg: template4 },
+  { id: 5, name: "mẫu 5", bg: template5 },
+  { id: 6, name: "mẫu 6", bg: template6 },
 ];
 
 // Trạng thái
@@ -166,9 +170,50 @@ const handleImageUpload = (e) => {
 };
 
 const downloadImage = async () => {
-  const canvas = await html2canvas(previewRef.value, {
+  const el = previewRef.value;
+  // Khung thiết kế cố định 1536x1024 (đồng bộ với CSS `.khung_template`)
+  const W = 1536;
+  const H = 1024;
+  const avatarRect = el.querySelector(".avatar")?.getBoundingClientRect();
+
+  const canvas = await html2canvas(el, {
     useCORS: true, // rất quan trọng nếu bạn dùng hình ảnh từ file hoặc background có SVG
     scale: 2, // tăng độ nét cho ảnh xuất ra
+    width: W,
+    height: H,
+    windowWidth: W,
+    windowHeight: H,
+    scrollX: 0,
+    scrollY: 0,
+    onclone: (doc) => {
+      const clonedRoot = doc.querySelector(".khung_template");
+      if (clonedRoot instanceof HTMLElement) {
+        clonedRoot.style.width = `${W}px`;
+        clonedRoot.style.height = `${H}px`;
+        clonedRoot.style.transform = "none";
+      }
+      const bg = doc.querySelector(".bg-img");
+      if (bg instanceof HTMLImageElement) {
+        bg.style.width = "100%";
+        bg.style.height = "100%";
+        bg.style.objectFit = "cover";
+      }
+      // Ép kích thước vuông trong bản clone để tránh làm tròn khác khi render canvas
+      if (avatarRect) {
+        const s = `${Math.round(avatarRect.width)}px`;
+        const clonedAvatar = doc.querySelector(".avatar");
+        if (clonedAvatar instanceof HTMLElement) {
+          clonedAvatar.style.width = s;
+          clonedAvatar.style.height = s;
+        }
+      }
+      const clonedImg = doc.querySelector(".avatar img");
+      if (clonedImg instanceof HTMLImageElement) {
+        clonedImg.style.width = "100%";
+        clonedImg.style.height = "100%";
+        clonedImg.style.objectFit = "cover";
+      }
+    },
   });
 
   canvas.toBlob((blob) => {
@@ -185,6 +230,9 @@ const downloadImage = async () => {
 </script>
 
 <style lang="scss">
+.active{
+  border: 1px solid red;
+}
 .input {
   @apply w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-pink-300 bg-white shadow-sm transition duration-150 ease-in-out;
   font-size: 1rem;
@@ -209,73 +257,417 @@ const downloadImage = async () => {
     position: relative;
     width: 100%;
     height: 100%;
-    img {
-      width: 21%;
-      object-fit: cover;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
+    .avatar {
+      width: 493px;
+      height: 493px;
       position: absolute;
-      top: 18%;
-      left: 10.3%;
+      top: 265px;
+      left: 74px;
+      overflow: hidden;
     }
-    .date_wrap {
+    .avatar img {
       position: absolute;
-      bottom: 15%;
-      right: 10%;
-      color: darkred;
-      font-family: cursive;
-      font-size: 1.125rem;
-      line-height: 1.4;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .border_avt{
+          width: 450px;
+        height: 450px;
+        position: absolute;
+        top: 275px;
+        left: 84px;
+        overflow: hidden;
+        border: 10px solid #fcf7f8;
+    }
+     .date_wrap {
+        position: absolute;
+        bottom: 15%;
+        right: 18%;
+        color: #213547;
+        font-family: auto;
+        font-size: 1.5rem;
+        line-height: 1.4;
+        font-style: italic;
     }
     .name_wrap {
-      position: absolute;
-      top: 43%;
-      left: 6%;
-      color: #00a69c;
-      width: 30%;
-      text-align: center;
+          position: absolute;
+        top: 76%;
+        left: 4%;
+        color: #000000;
+        width: 34%;
+        text-align: center;
       .name {
-        font-size: 2rem;
+        font-size: 2.5rem;
         line-height: 1.2;
-        margin-bottom: 23px;
+        margin-bottom: 15px;
         font-weight: 700;
       }
       .class {
-        font-size: 1.125rem;
+        font-size: 1.5rem;
+        font-weight: bold;
         line-height: 1.4;
+        font-style: italic;
       }
     }
     .comment_wrap {
-      width: 55%;
+      width: 50%;
       position: absolute;
-      right: 5%;
-      color: darkred;
-      font-family: cursive;
-      top: 37%;
-      font-size: 1.5rem;
+      right: 10%;
+      color: #213547;
+      font-family: emoji;
+      top: 48%;
+      font-size: 2rem;
       line-height: 1.6;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
     }
   }
 }
 
 .template-2 {
-  background: linear-gradient(to bottom, #fceabb, #f8b500);
-  background-image: url("/bg/rainbow.svg"); /* cầu vồng, bóng bay */
-  background-repeat: no-repeat;
-  background-position: center;
+    .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+        width: 422px; /* ~27.5% của 1536px */
+        height: 422px;
+        border-radius: 50%;
+        position: absolute;
+        top: 26.6%;
+        left: 10%;
+        overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .date_wrap {
+          position: absolute;
+          bottom: 15%;
+          right: 18%;
+          color: #213547;
+          font-family: auto;
+          font-size: 1.5rem;
+          line-height: 1.4;
+          font-style: italic;
+    }
+    .name_wrap {
+      position: absolute;
+      top: 71%;
+      left: 9%;
+      color: #000000;
+      width: 30%;
+      text-align: center;
+      .name {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      .class {
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.4;
+        font-style: italic;
+      }
+    }
+    .comment_wrap {
+      width: 50%;
+      position: absolute;
+      right: 10%;
+      color: #213547;
+      font-family: emoji;
+      top: 48%;
+      font-size: 2rem;
+      line-height: 1.6;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
+    }
+  }
 }
-
 .template-3 {
-  background: linear-gradient(to right, #cce5ff, #e6f7ff);
-  background-image: url("/bg/space.svg"); /* tên lửa, hành tinh */
-  background-size: cover;
+    .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+        width: 443px;
+      height: 443px;
+      border-radius: 50%;
+      position: absolute;
+      top: 30%;
+      left: 11%;
+      overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .date_wrap {
+          position: absolute;
+          bottom: 15%;
+          right: 18%;
+          color: #213547;
+          font-family: auto;
+          font-size: 1.5rem;
+          line-height: 1.4;
+          font-style: italic;
+    }
+    .name_wrap {
+        position: absolute;
+        top: 77%;
+        left: 9%;
+        color: #000000;
+        width: 33%;
+        text-align: center;
+      .name {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      .class {
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.4;
+        font-style: italic;
+      }
+    }
+    .comment_wrap {
+          width: 50%;
+        position: absolute;
+        right: 8%;
+        color: #213547;
+        font-family: emoji;
+        top: 48%;
+        font-size: 2rem;
+        line-height: 1.6;
+        font-weight: bold;
+        font-style: italic;
+        transform: translateY(-50%);
+    }
+  }
+}
+.template-4 {
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+         width: 505px;
+      height: 505px;
+      position: absolute;
+      top: 255px;
+      left: 121px;
+      overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .border_avt{
+      width: 450px;
+      height: 450px;
+      position: absolute;
+      top: 273px;
+      left: 138px;
+      overflow: hidden;
+      border: 10px solid #fcf7f8;
+    }
+     .date_wrap {
+        position: absolute;
+        bottom: 15%;
+        right: 18%;
+        color: #213547;
+        font-family: auto;
+        font-size: 1.5rem;
+        line-height: 1.4;
+        font-style: italic;
+    }
+    .name_wrap {
+          position: absolute;
+        top: 76%;
+        left: 4%;
+        color: #000000;
+        width: 34%;
+        text-align: center;
+      .name {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      .class {
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.4;
+        font-style: italic;
+      }
+    }
+    .comment_wrap {
+      width: 47%;
+      position: absolute;
+      right: 10%;
+      color: #213547;
+      font-family: emoji;
+      top: 48%;
+      font-size: 2rem;
+      line-height: 1.6;
+      font-weight: bold;
+      transform: translateY(-50%);
+      font-style: italic;
+    }
+  }
 }
 
-.template-4 {
-  background: linear-gradient(to bottom left, #fff0f6, #f9f0ff);
-  background-image: url("/bg/toys.svg"); /* gấu bông, đồ chơi */
-  background-size: cover;
+.template-5 {
+    .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+           width: 445px;
+      height: 445px;
+      border-radius: 50%;
+      position: absolute;
+      top: 251px;
+      left: 133px;
+      overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .date_wrap {
+      position: absolute;
+      bottom: 18%;
+      right: 25%;
+      color: #213547;
+      font-family: auto;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .name_wrap {
+      position: absolute;
+      top: 71%;
+      left: 9%;
+      color: #000000;
+      width: 30%;
+      text-align: center;
+      .name {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      .class {
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.4;
+        font-style: italic;
+      }
+    }
+    .comment_wrap {
+      width: 54%;
+      position: absolute;
+      right: 5%;
+      color: #213547;
+      font-family: emoji;
+      top: 48%;
+      font-size: 2rem;
+      line-height: 1.6;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
+
+    }
+  }
 }
+.template-6 {
+    .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+          width: 443px;
+      height: 443px;
+      border-radius: 50% 50% 0 0;
+      position: absolute;
+      top: 322px;
+      left: 131px;
+      overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .date_wrap {
+      position: absolute;
+      bottom: 15%;
+      right: 25%;
+      color: #213547;
+      font-family: auto;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .name_wrap {
+          position: absolute;
+        top: 75%;
+        left: 7%;
+        color: #000000;
+        width: 32%;
+        text-align: center;
+      .name {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      .class {
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.4;
+        font-style: italic;
+      }
+    }
+    .comment_wrap {
+          width: 52%;
+        position: absolute;
+        right: 7%;
+       color: #213547;
+      font-family: emoji;
+        top: 52%;
+        font-size: 2rem;
+      line-height: 1.6;
+        transform: translateY(-50%);
+      font-style: italic;
+      font-weight: bold;
+    }
+  }
+}
+
 .content_wrap {
   width: 100%;
   height: 100%;
@@ -285,5 +677,7 @@ const downloadImage = async () => {
 }
 .khung_template {
   position: relative;
+  width: 1536px;
+  height: 1024px;
 }
 </style>
