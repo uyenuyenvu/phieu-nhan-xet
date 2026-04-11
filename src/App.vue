@@ -53,7 +53,7 @@
           />
         </div>
         <!-- Cột 3: Ngày và giáo viên chủ nhiệm -->
-         <div style="display: flex; flex-direction: column">
+         <!--<div style="display: flex; flex-direction: column">
           <input
             id="date"
             type="date"
@@ -67,7 +67,7 @@
             placeholder="Tên giáo viên chủ nhiệm"
             class="input"
           />
-        </div> 
+        </div> -->
       </div>
     </div>
 
@@ -98,11 +98,11 @@
             {{ comment }}
           </div>
 
-           <div class="text-right mt-6 text-sm date_wrap">
+           <!--<div class="text-right mt-6 text-sm date_wrap">
             <div>{{ formattedDate }}</div>
             <div class="mt-2 font-semibold">Giáo viên chủ nhiệm</div>
             <div class="mt-2 font-semibold">{{ teacherName || "..." }}</div>
-          </div> 
+          </div> -->
         </div>
       </div>
     </div>
