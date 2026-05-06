@@ -29,12 +29,6 @@
             class="input"
           />
           <input
-            id="studentClass"
-            v-model="studentClass"
-            placeholder="Lớp"
-            class="input"
-          />
-          <input
             id="studentImage"
             type="file"
             accept="image/*"
@@ -79,6 +73,9 @@
            <div class="class_wrap">
                    <img :src="class_tem">
           </div>
+           <div class="charm1" v-if="[2].includes(selectedTemplate?.id)">
+                   <img :src="charm">
+          </div>
 
           <div class="mt-4 text-sm leading-relaxed whitespace-pre-line comment_wrap">
             {{ comment }}
@@ -113,6 +110,7 @@ import template8 from "../assets/template2/8.png";
 import template9 from "../assets/template2/9.png";
 import template10 from "../assets/template2/10.png";
 import class_tem from "../assets/template2/class.png";
+import charm from "../assets/template2/charm1.png";
 
 const templates = [
   { id: 1, name: "mẫu 1", bg: template1 },
@@ -213,7 +211,7 @@ const downloadImage = async () => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .active {
   border: 1px solid red;
 }
@@ -313,20 +311,19 @@ const downloadImage = async () => {
     }
   }
 }
-
 .template-2 {
   .content {
     position: relative;
     width: 100%;
     height: 100%;
     .avatar {
-      width: 422px;
-      height: 422px;
-      border-radius: 50%;
+      width: 346px;
+      height: 346px;
       position: absolute;
-      top: 26.6%;
-      left: 10%;
+      top: 129px;
+      right: 77px;
       overflow: hidden;
+      border-radius: 10px;
     }
     .avatar img {
       position: absolute;
@@ -334,6 +331,15 @@ const downloadImage = async () => {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    .border_avt {
+      width: 450px;
+      height: 450px;
+      position: absolute;
+      top: 275px;
+      left: 84px;
+      overflow: hidden;
+      border: 10px solid #fcf7f8;
     }
     .date_wrap {
       position: absolute;
@@ -346,40 +352,55 @@ const downloadImage = async () => {
       font-style: italic;
     }
     .name_wrap {
-      position: absolute;
-      top: 71%;
-      left: 9%;
-      color: #000000;
-      width: 30%;
-      text-align: center;
+         position: absolute;
+        top: 5%;
+        left: 20%;
+        color: #ffc0cb;
+        width: 31%;
+        text-align: right;
+        font-family: cursive;
+        font-style: italic;
+        font-weight: bolder;
+        text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
       .name {
-        font-size: 2.5rem;
+        font-size: 3rem;
         line-height: 1.2;
         margin-bottom: 15px;
         font-weight: 700;
       }
-      .class {
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.4;
-        font-style: italic;
+    }
+    .class_wrap{
+      bottom: 5.5%;
+      position: absolute;
+      height: 50px;
+      left: 19%;
+      img{
+        height: 100%;
       }
     }
+    .charm1{
+          width: 45px;
+        right: 60px;
+        top: 29px;
+        position: absolute;
+        transform: rotate(-49deg);
+    }
     .comment_wrap {
-      width: 50%;
+      width: 47%;
       position: absolute;
-      right: 10%;
+      left: 2%;
       color: #213547;
       font-family: emoji;
-      top: 48%;
-      font-size: 2rem;
-      line-height: 1.6;
+      top: 52%;
+      font-size: 1.5rem;
+      line-height: 1.5;
       font-weight: bold;
       font-style: italic;
       transform: translateY(-50%);
     }
   }
 }
+
 .template-3 {
   .content {
     position: relative;
@@ -660,6 +681,7 @@ const downloadImage = async () => {
   top: 0;
   position: ABSOLUTE;
   left: 0;
+  overflow:hidden;
 }
 .khung_template {
   position: relative;

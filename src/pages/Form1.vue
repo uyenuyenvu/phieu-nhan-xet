@@ -207,7 +207,7 @@ const downloadImage = async () => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .active {
   border: 1px solid red;
 }
