@@ -76,6 +76,15 @@
            <div class="charm1" v-if="[2].includes(selectedTemplate?.id)">
                    <img :src="charm">
           </div>
+          <div class="charm2" v-if="[3].includes(selectedTemplate?.id)">
+                   <img :src="charm2">
+          </div>
+          <div class="charm3" v-if="[3].includes(selectedTemplate?.id)">
+                   <img :src="charm2">
+          </div>
+          <div class="charm4" v-if="[3].includes(selectedTemplate?.id)">
+                   <img :src="charm2">
+          </div>
 
           <div class="mt-4 text-sm leading-relaxed whitespace-pre-line comment_wrap">
             {{ comment }}
@@ -111,6 +120,7 @@ import template9 from "../assets/template2/9.png";
 import template10 from "../assets/template2/10.png";
 import class_tem from "../assets/template2/class.png";
 import charm from "../assets/template2/charm1.png";
+import charm2 from "../assets/template2/charm2.png";
 
 const templates = [
   { id: 1, name: "mẫu 1", bg: template1 },
@@ -407,12 +417,11 @@ const downloadImage = async () => {
     width: 100%;
     height: 100%;
     .avatar {
-      width: 443px;
-      height: 443px;
-      border-radius: 50%;
+      width: 318px;
+      height: 318px;
       position: absolute;
-      top: 30%;
-      left: 11%;
+      top: 125px;
+      left: 124px;
       overflow: hidden;
     }
     .avatar img {
@@ -421,6 +430,15 @@ const downloadImage = async () => {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    .border_avt {
+      width: 450px;
+      height: 450px;
+      position: absolute;
+      top: 275px;
+      left: 84px;
+      overflow: hidden;
+      border: 10px solid #fcf7f8;
     }
     .date_wrap {
       position: absolute;
@@ -433,34 +451,81 @@ const downloadImage = async () => {
       font-style: italic;
     }
     .name_wrap {
-      position: absolute;
-      top: 77%;
-      left: 9%;
-      color: #000000;
-      width: 33%;
-      text-align: center;
+        position: absolute;
+      top: 5%;
+      left: 50%;
+      color: #ffc0cb;
+      text-align: right;
+      font-family: cursive;
+      font-style: italic;
+      font-weight: bolder;
+      text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
+      transform: translateX(-50%);
       .name {
-        font-size: 2.5rem;
+        font-size: 3rem;
         line-height: 1.2;
         margin-bottom: 15px;
         font-weight: 700;
       }
-      .class {
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.4;
-        font-style: italic;
+    }
+    .class_wrap{
+         bottom: 8%;
+        position: absolute;
+        height: 50px;
+        left: 57%;
+      img{
+        height: 100%;
       }
     }
-    .comment_wrap {
-      width: 50%;
+    .charm1{
+          width: 45px;
+        right: 60px;
+        top: 29px;
+        position: absolute;
+        transform: rotate(-49deg);
+    }
+    .charm2{
+          width: 89px;
+        height: 89px;
+        position: absolute;
+        top: 329px;
+        left: 368px;
+        img{
+          width:100%;
+          border-radius: 50%;
+        }
+    }
+    .charm3{
+            width: 63px;
+          height: 63px;
+          position: absolute;
+          top: 320px;
+          left: 103px;
+        img{
+          width:100%;
+          border-radius: 50%;
+        }
+    }
+    .charm4{
+       width: 44px;
+      height: 44px;
       position: absolute;
-      right: 8%;
+      top: 245px;
+      left: 417px;
+        img{
+          width:100%;
+          border-radius: 50%;
+        }
+    }
+    .comment_wrap {
+          width: 45%;
+      position: absolute;
+      right: 6%;
       color: #213547;
       font-family: emoji;
-      top: 48%;
-      font-size: 2rem;
-      line-height: 1.6;
+      top: 46%;
+      font-size: 1.5rem;
+      line-height: 1.7;
       font-weight: bold;
       font-style: italic;
       transform: translateY(-50%);
