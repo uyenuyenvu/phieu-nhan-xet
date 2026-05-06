@@ -65,15 +65,16 @@
           </div>
           <div
             class="border_avt"  
-            v-if="[ 4].includes(selectedTemplate?.id)"
+            v-if="[7].includes(selectedTemplate?.id)"
           ></div>
           <div class="name_wrap">
             <div class="name">{{ studentName }}</div>
           </div>
            <div class="class_wrap">
-                   <img :src="class_tem">
+                   <img :src="class_tem" v-if="![9].includes(selectedTemplate?.id)">
+                   <img :src="class_tem2" v-else>
           </div>
-           <div class="charm1" v-if="[2].includes(selectedTemplate?.id)">
+           <div class="charm1" v-if="[2, 10].includes(selectedTemplate?.id)">
                    <img :src="charm">
           </div>
           <div class="charm2" v-if="[3].includes(selectedTemplate?.id)">
@@ -85,7 +86,9 @@
           <div class="charm4" v-if="[3].includes(selectedTemplate?.id)">
                    <img :src="charm2">
           </div>
-
+            <div class="charm5" v-if="[4,6,9].includes(selectedTemplate?.id)">
+               <img :src="charm3">
+          </div>
           <div class="mt-4 text-sm leading-relaxed whitespace-pre-line comment_wrap">
             {{ comment }}
           </div>
@@ -119,8 +122,10 @@ import template8 from "../assets/template2/8.png";
 import template9 from "../assets/template2/9.png";
 import template10 from "../assets/template2/10.png";
 import class_tem from "../assets/template2/class.png";
+import class_tem2 from "../assets/template2/class2.png";
 import charm from "../assets/template2/charm1.png";
 import charm2 from "../assets/template2/charm2.png";
+import charm3 from "../assets/template2/charm3.png";
 
 const templates = [
   { id: 1, name: "mẫu 1", bg: template1 },
@@ -538,11 +543,11 @@ const downloadImage = async () => {
     width: 100%;
     height: 100%;
     .avatar {
-      width: 505px;
-      height: 505px;
+      width: 297px;
+      height: 297px;
       position: absolute;
-      top: 255px;
-      left: 121px;
+      top: 137px;
+      right: 96px;
       overflow: hidden;
     }
     .avatar img {
@@ -556,8 +561,8 @@ const downloadImage = async () => {
       width: 450px;
       height: 450px;
       position: absolute;
-      top: 273px;
-      left: 138px;
+      top: 275px;
+      left: 84px;
       overflow: hidden;
       border: 10px solid #fcf7f8;
     }
@@ -572,53 +577,68 @@ const downloadImage = async () => {
       font-style: italic;
     }
     .name_wrap {
-      position: absolute;
-      top: 76%;
-      left: 4%;
-      color: #000000;
-      width: 34%;
-      text-align: center;
+        position: absolute;
+      top: 5%;
+      left: 50%;
+      color: #ffc0cb;
+      text-align: right;
+      font-family: cursive;
+      font-style: italic;
+      font-weight: bolder;
+      text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
+      transform: translateX(-50%);
       .name {
-        font-size: 2.5rem;
+        font-size: 3rem;
         line-height: 1.2;
         margin-bottom: 15px;
         font-weight: 700;
       }
-      .class {
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.4;
-        font-style: italic;
+    }
+    .class_wrap{
+         bottom: 8%;
+        position: absolute;
+        height: 50px;
+        left: 25%;
+      img{
+        height: 100%;
       }
     }
-    .comment_wrap {
-      width: 47%;
+    .charm5{
+      width: 76px;
       position: absolute;
-      right: 10%;
-      color: #213547;
-      font-family: emoji;
-      top: 48%;
-      font-size: 2rem;
-      line-height: 1.6;
-      font-weight: bold;
-      transform: translateY(-50%);
-      font-style: italic;
+      right: 82px;
+      bottom: 145px;
+      transform: rotate(-36deg);
+        img{
+          width:100%;
+        }
+    }
+    .comment_wrap {
+          width: 47%;
+        position: absolute;
+        left: 9%;
+        color: #213547;
+        font-family: emoji;
+        top: 51%;
+        font-size: 1.5rem;
+        line-height: 1.7;
+        font-weight: bold;
+        font-style: italic;
+        transform: translateY(-50%);
     }
   }
 }
-
 .template-5 {
   .content {
     position: relative;
     width: 100%;
     height: 100%;
     .avatar {
-      width: 445px;
-      height: 445px;
-      border-radius: 50%;
+      width: 306px;
+      height: 297px;
       position: absolute;
-      top: 251px;
-      left: 133px;
+      top: 167px;
+      left: 88px;
       overflow: hidden;
     }
     .avatar img {
@@ -628,10 +648,19 @@ const downloadImage = async () => {
       height: 100%;
       object-fit: cover;
     }
+    .border_avt {
+      width: 450px;
+      height: 450px;
+      position: absolute;
+      top: 275px;
+      left: 84px;
+      overflow: hidden;
+      border: 10px solid #fcf7f8;
+    }
     .date_wrap {
       position: absolute;
-      bottom: 18%;
-      right: 25%;
+      bottom: 15%;
+      right: 18%;
       color: #213547;
       font-family: auto;
       font-size: 1.5rem;
@@ -639,37 +668,54 @@ const downloadImage = async () => {
       font-style: italic;
     }
     .name_wrap {
-      position: absolute;
-      top: 71%;
-      left: 9%;
-      color: #000000;
-      width: 30%;
-      text-align: center;
+        position: absolute;
+      top: 5%;
+      left: 50%;
+      color: #ffc0cb;
+      text-align: right;
+      font-family: cursive;
+      font-style: italic;
+      font-weight: bolder;
+      text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
+      transform: translateX(-50%);
       .name {
-        font-size: 2.5rem;
+        font-size: 3rem;
         line-height: 1.2;
         margin-bottom: 15px;
         font-weight: 700;
       }
-      .class {
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.4;
-        font-style: italic;
+    }
+    .class_wrap{
+         bottom: 8%;
+        position: absolute;
+        height: 50px;
+        left: 60%;
+      img{
+        height: 100%;
       }
     }
-    .comment_wrap {
-      width: 54%;
+    .charm5{
+      width: 76px;
       position: absolute;
-      right: 5%;
-      color: #213547;
-      font-family: emoji;
-      top: 48%;
-      font-size: 2rem;
-      line-height: 1.6;
-      font-weight: bold;
-      font-style: italic;
-      transform: translateY(-50%);
+      right: 82px;
+      bottom: 145px;
+      transform: rotate(-36deg);
+        img{
+          width:100%;
+        }
+    }
+    .comment_wrap {
+          width: 41.5%;
+        position: absolute;
+        left: 49%;
+        color: #213547;
+        font-family: emoji;
+        top: 49%;
+        font-size: 1.5rem;
+        line-height: 1.7;
+        font-weight: bold;
+        font-style: italic;
+        transform: translateY(-50%);
     }
   }
 }
@@ -679,12 +725,11 @@ const downloadImage = async () => {
     width: 100%;
     height: 100%;
     .avatar {
-      width: 443px;
-      height: 443px;
-      border-radius: 50% 50% 0 0;
+      width: 305px;
+      height: 305px;
       position: absolute;
-      top: 322px;
-      left: 131px;
+      top: 113px;
+      right: 123px;
       overflow: hidden;
     }
     .avatar img {
@@ -694,10 +739,19 @@ const downloadImage = async () => {
       height: 100%;
       object-fit: cover;
     }
+    .border_avt {
+      width: 450px;
+      height: 450px;
+      position: absolute;
+      top: 275px;
+      left: 84px;
+      overflow: hidden;
+      border: 10px solid #fcf7f8;
+    }
     .date_wrap {
       position: absolute;
       bottom: 15%;
-      right: 25%;
+      right: 18%;
       color: #213547;
       font-family: auto;
       font-size: 1.5rem;
@@ -705,41 +759,427 @@ const downloadImage = async () => {
       font-style: italic;
     }
     .name_wrap {
-      position: absolute;
-      top: 75%;
-      left: 7%;
-      color: #000000;
-      width: 32%;
-      text-align: center;
+        position: absolute;
+          top: 10%;
+      left: 40%;
+      color: #ffc0cb;
+      text-align: right;
+      font-family: cursive;
+      font-style: italic;
+      font-weight: bolder;
+      text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
+      transform: translateX(-50%);
       .name {
-        font-size: 2.5rem;
+        font-size: 3rem;
         line-height: 1.2;
         margin-bottom: 15px;
         font-weight: 700;
       }
-      .class {
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.4;
-        font-style: italic;
+    }
+    .class_wrap{
+         bottom: 8%;
+        position: absolute;
+        height: 50px;
+        left: 60%;
+      img{
+        height: 100%;
       }
     }
-    .comment_wrap {
-      width: 52%;
+    .charm5{
+      width: 76px;
       position: absolute;
-      right: 7%;
-      color: #213547;
-      font-family: emoji;
-      top: 52%;
-      font-size: 2rem;
-      line-height: 1.6;
-      transform: translateY(-50%);
-      font-style: italic;
-      font-weight: bold;
+      right: 82px;
+      bottom: 145px;
+      transform: rotate(-36deg);
+        img{
+          width:100%;
+        }
+    }
+    .comment_wrap {
+         width: 33.5%;
+        position: absolute;
+        left: 17%;
+        color: #213547;
+        font-family: emoji;
+        top: 49%;
+        font-size: 1.5rem;
+        line-height: 1.7;
+        font-weight: bold;
+        font-style: italic;
+        transform: translateY(-50%);
     }
   }
 }
-
+.template-7 {
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+      width: 355px;
+      height: 355px;
+      position: absolute;
+      top: 124px;
+      left: 92px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .border_avt {
+      width: 331px;
+      height: 331px;
+      position: absolute;
+      top: 135px;
+      left: 100px;
+      overflow: hidden;
+      border: 4px solid #fcf7f8;
+      border-radius: 10px;
+    }
+    .date_wrap {
+      position: absolute;
+      bottom: 15%;
+      right: 18%;
+      color: #213547;
+      font-family: auto;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .name_wrap {
+        position: absolute;
+        top: 4%;
+        left: 44%;
+        width: 35%;
+        color: #ffc0cb;
+        text-align: center;
+        font-family: cursive;
+        font-style: italic;
+        font-weight: bolder;
+        text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
+        transform: translateX(-50%);
+      .name {
+        font-size: 3rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+    }
+    .class_wrap{
+      bottom: 5%;
+      position: absolute;
+      height: 50px;
+      left: 51%;
+      img{
+        height: 100%;
+      }
+    }
+    .charm5{
+      width: 76px;
+      position: absolute;
+      right: 82px;
+      bottom: 145px;
+      transform: rotate(-36deg);
+        img{
+          width:100%;
+        }
+    }
+    .comment_wrap {
+      width: 36.5%;
+      position: absolute;
+      right: 13%;
+      color: #213547;
+      font-family: emoji;
+      top: 54%;
+      font-size: 1.5rem;
+      line-height: 1.7;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
+    }
+  }
+}
+.template-8 {
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+      width: 320px;
+      height: 320px;
+      position: absolute;
+      top: 142px;
+      left: 92px;
+      border-radius: 54px 54px 35px 35px;
+      overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .border_avt {
+      width: 331px;
+      height: 331px;
+      position: absolute;
+      top: 135px;
+      left: 100px;
+      overflow: hidden;
+      border: 4px solid #fcf7f8;
+      border-radius: 10px;
+    }
+    .date_wrap {
+      position: absolute;
+      bottom: 15%;
+      right: 18%;
+      color: #213547;
+      font-family: auto;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .name_wrap {
+        position: absolute;
+        top: 4%;
+        left: 63%;
+        width: 35%;
+        color: #ffc0cb;
+        text-align: center;
+        font-family: cursive;
+        font-style: italic;
+        font-weight: bolder;
+        text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
+        transform: translateX(-50%);
+      .name {
+        font-size: 3rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+    }
+    .class_wrap{
+      bottom: 5%;
+      position: absolute;
+      height: 50px;
+      left: 54%;
+      img{
+        height: 100%;
+      }
+    }
+    .charm5{
+      width: 76px;
+      position: absolute;
+      right: 82px;
+      bottom: 145px;
+      transform: rotate(-36deg);
+        img{
+          width:100%;
+        }
+    }
+    .comment_wrap {
+      width: 42.5%;
+      position: absolute;
+      right: 13%;
+      color: #213547;
+      font-family: emoji;
+      top: 50%;
+      font-size: 1.5rem;
+      line-height: 1.7;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
+    }
+  }
+}
+.template-9 {
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+      width: 330px;
+      height: 330px;
+      position: absolute;
+      top: 109px;
+      right: 110px;
+      overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .border_avt {
+      width: 331px;
+      height: 331px;
+      position: absolute;
+      top: 135px;
+      left: 100px;
+      overflow: hidden;
+      border: 4px solid #fcf7f8;
+      border-radius: 10px;
+    }
+    .date_wrap {
+      position: absolute;
+      bottom: 15%;
+      right: 18%;
+      color: #213547;
+      font-family: auto;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .name_wrap {
+        position: absolute;
+        top: 4%;
+        left: 50%;
+        width: 100%;
+        color: #ffc0cb;
+        text-align: center;
+        font-family: cursive;
+        font-style: italic;
+        font-weight: bolder;
+        text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
+        transform: translateX(-50%);
+      .name {
+        font-size: 3rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+    }
+    .class_wrap{
+      bottom: 7%;
+      position: absolute;
+      height: 50px;
+      left: 20%;
+      img{
+        height: 100%;
+      }
+    }
+    .charm5{
+      width: 86px;
+      position: absolute;
+      right: 82px;
+      bottom: 145px;
+      transform: rotate(-36deg);
+        img{
+          width:100%;
+        }
+    }
+    .comment_wrap {
+      width: 33.5%;
+      position: absolute;
+      left: 14%;
+      color: #213547;
+      font-family: emoji;
+      top: 50%;
+      font-size: 1.5rem;
+      line-height: 1.7;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
+    }
+  }
+}
+.template-10 {
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .avatar {
+      width: 346px;
+      height: 346px;
+      position: absolute;
+      top: 129px;
+      right: 77px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .border_avt {
+      width: 450px;
+      height: 450px;
+      position: absolute;
+      top: 275px;
+      left: 84px;
+      overflow: hidden;
+      border: 10px solid #fcf7f8;
+    }
+    .date_wrap {
+      position: absolute;
+      bottom: 15%;
+      right: 18%;
+      color: #213547;
+      font-family: auto;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .name_wrap {
+         position: absolute;
+        top: 16%;
+        left: 9%;
+        color: #ffc0cb;
+        width: 31%;
+        text-align: right;
+        font-family: cursive;
+        font-style: italic;
+        font-weight: bolder;
+        text-shadow: -3px -3px 0 #e75480, 3px -3px 0 #e75480, -3px 3px 0 #e75480, 3px 3px 0 #e75480, -4px 0px 0 #e75480, 4px 0px 0 #e75480, 0px -4px 0 #e75480, 0px 4px 0 #e75480, 0 0 6px rgba(231, 84, 128, 0.6);
+      .name {
+        font-size: 3rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+    }
+    .class_wrap{
+      bottom: 5.5%;
+      position: absolute;
+      height: 50px;
+      left: 19%;
+      img{
+        height: 100%;
+      }
+    }
+    .charm1{
+          width: 45px;
+        right: 60px;
+        top: 29px;
+        position: absolute;
+        transform: rotate(-49deg);
+    }
+    .comment_wrap {
+      width: 46%;
+      position: absolute;
+      left: 2%;
+      color: #213547;
+      font-family: emoji;
+      top: 52%;
+      font-size: 1.5rem;
+      line-height: 1.5;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
+    }
+  }
+}
 .content_wrap {
   width: 100%;
   height: 100%;
