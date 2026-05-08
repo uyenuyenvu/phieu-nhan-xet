@@ -312,12 +312,12 @@ const downloadImage = async () => {
       left: 20%;
     }
     .comment_wrap {
-      width: 47%;
+      width: 46%;
       position: absolute;
       left: 9%;
       color: #213547;
       font-family: emoji;
-      top: 50%;
+      top: 46%;
       font-size: 1.5rem;
       line-height: 1.3;
       font-weight: bold;
@@ -401,17 +401,17 @@ const downloadImage = async () => {
         transform: rotate(-49deg);
     }
     .comment_wrap {
-      width: 47%;
-      position: absolute;
-      left: 2%;
-      color: #213547;
-      font-family: emoji;
-      top: 52%;
-      font-size: 1.5rem;
-      line-height: 1.5;
-      font-weight: bold;
-      font-style: italic;
-      transform: translateY(-50%);
+        width: 46%;
+        position: absolute;
+        left: 2%;
+        color: #213547;
+        font-family: emoji;
+        top: 51%;
+        font-size: 1.5rem;
+        line-height: 1.4;
+        font-weight: bold;
+        font-style: italic;
+        transform: translateY(-50%);
     }
   }
 }
@@ -530,7 +530,7 @@ const downloadImage = async () => {
       font-family: emoji;
       top: 46%;
       font-size: 1.5rem;
-      line-height: 1.7;
+      line-height: 1.5;
       font-weight: bold;
       font-style: italic;
       transform: translateY(-50%);
@@ -614,17 +614,17 @@ const downloadImage = async () => {
         }
     }
     .comment_wrap {
-          width: 47%;
-        position: absolute;
-        left: 9%;
-        color: #213547;
-        font-family: emoji;
-        top: 51%;
-        font-size: 1.5rem;
-        line-height: 1.7;
-        font-weight: bold;
-        font-style: italic;
-        transform: translateY(-50%);
+      width: 46%;
+      position: absolute;
+      left: 9%;
+      color: #213547;
+      font-family: emoji;
+      top: 50%;
+      font-size: 1.5rem;
+      line-height: 1.5;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
     }
   }
 }
@@ -705,17 +705,17 @@ const downloadImage = async () => {
         }
     }
     .comment_wrap {
-          width: 41.5%;
-        position: absolute;
-        left: 49%;
-        color: #213547;
-        font-family: emoji;
-        top: 49%;
-        font-size: 1.5rem;
-        line-height: 1.7;
-        font-weight: bold;
-        font-style: italic;
-        transform: translateY(-50%);
+      width: 41%;
+      position: absolute;
+      left: 49.5%;
+      color: #213547;
+      font-family: emoji;
+      top: 52%;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
     }
   }
 }
@@ -796,17 +796,17 @@ const downloadImage = async () => {
         }
     }
     .comment_wrap {
-         width: 33.5%;
-        position: absolute;
-        left: 17%;
-        color: #213547;
-        font-family: emoji;
-        top: 49%;
-        font-size: 1.5rem;
-        line-height: 1.7;
-        font-weight: bold;
-        font-style: italic;
-        transform: translateY(-50%);
+      width: 38.5%;
+      position: absolute;
+      left: 16%;
+      color: #213547;
+      font-family: emoji;
+      top: 50%;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      font-weight: bold;
+      font-style: italic;
+      transform: translateY(-50%);
     }
   }
 }
@@ -890,12 +890,12 @@ const downloadImage = async () => {
         }
     }
     .comment_wrap {
-      width: 36.5%;
+      width: 45.5%;
       position: absolute;
-      right: 13%;
+      right: 4%;
       color: #213547;
       font-family: emoji;
-      top: 54%;
+      top: 55%;
       font-size: 1.5rem;
       line-height: 1.7;
       font-weight: bold;
@@ -1077,17 +1077,17 @@ const downloadImage = async () => {
         }
     }
     .comment_wrap {
-      width: 33.5%;
-      position: absolute;
-      left: 14%;
-      color: #213547;
-      font-family: emoji;
-      top: 50%;
-      font-size: 1.5rem;
-      line-height: 1.7;
-      font-weight: bold;
-      font-style: italic;
-      transform: translateY(-50%);
+          width: 46.5%;
+          position: absolute;
+          left: 8%;
+          color: #213547;
+          font-family: emoji;
+          top: 51%;
+          font-size: 1.5rem;
+          line-height: 1.5;
+          font-weight: bold;
+          font-style: italic;
+          transform: translateY(-50%);
     }
   }
 }
@@ -1166,14 +1166,14 @@ const downloadImage = async () => {
         transform: rotate(-49deg);
     }
     .comment_wrap {
-      width: 46%;
+      width: 50%;
       position: absolute;
-      left: 2%;
+      left: 3%;
       color: #213547;
       font-family: emoji;
-      top: 52%;
+      top: 50%;
       font-size: 1.5rem;
-      line-height: 1.5;
+      line-height: 1.7;
       font-weight: bold;
       font-style: italic;
       transform: translateY(-50%);
